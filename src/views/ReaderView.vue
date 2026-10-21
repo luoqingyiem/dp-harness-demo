@@ -185,7 +185,9 @@ onUnmounted(() => {
       <p v-else class="reader__hint">{{ reader.loading ? "正在加载…" : "暂无内容" }}</p>
     </main>
 
-    <footer class="reader__status">第 {{ reader.currentIndex + 1 }}/{{ reader.total }} 章 · 全书 {{ percent }}%</footer>
+    <footer class="reader__status">
+      <div class="text" @click="drawerOpen = true">第 {{ reader.currentIndex + 1 }}/{{ reader.total }} 章 · 全书 {{ percent }}%</div>
+    </footer>
 
     <ChapterDrawer v-model="drawerOpen" :chapters="reader.chapters" :current-index="reader.currentIndex" @select="onSelectChapter" />
     <SettingsPanel v-model="settingsOpen" :settings="settings" @update="onSettingsUpdate" />
@@ -277,5 +279,13 @@ onUnmounted(() => {
   color: var(--app-fg-muted);
   background: color-mix(in srgb, var(--reader-bg) 92%, var(--app-panel));
   border-top: 1px solid var(--app-border);
+}
+
+.reader__status .text {
+  cursor: pointer;
+  user-select: none;
+}
+.reader__status .text:hover {
+  text-decoration: underline;
 }
 </style>
