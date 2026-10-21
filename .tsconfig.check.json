@@ -1,0 +1,9 @@
+﻿{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "typeRoots": ["node_modules/.pnpm/@types+node@26.6.5/node_modules/@types"],
+    "types": ["node"]
+  },
+  "include": ["electron/**/*.ts", "shared/**/*.ts", "tests/**/*.ts"]
+}

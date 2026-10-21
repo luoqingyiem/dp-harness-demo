@@ -1,0 +1,105 @@
+# ===== 操作系统 / 编辑器杂项 =====
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# 编辑器与 IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+
+# Office 临时文件（打开文档时自动生成，形如 ~$报告.docx）
+~$*
+
+# ===== 日志 / 临时文件 / 缓存 =====
+*.log
+logs/
+*.tmp
+*.temp
+*.bak
+*.orig
+.cache/
+
+# ===== 环境变量与密钥（切勿提交）=====
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+secrets/
+credentials.json
+
+# ===== 构建产物（各语言通用）=====
+dist/
+build/
+out/
+target/
+bin/
+
+# ===== Node.js =====
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.pnpm-store/
+.next/
+.nuxt/
+coverage/
+*.tsbuildinfo
+.eslintcache
+
+# ===== Python =====
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+*.egg-info/
+.eggs/
+
+# ===== Java =====
+*.class
+*.jar
+*.war
+.gradle/
+
+# ===== Go / Rust / 编译产物 =====
+*.exe
+*.exe~
+*.test
+*.out
+Cargo.lock
+
+# 压缩包（按需保留，默认忽略）
+*.zip
+*.7z
+*.rar
+
+git.md
+
+# ===== 本项目（TXT 阅读器）=====
+# 运行时数据目录：开发模式下位于项目根，打包后位于 exe 同级
+/data/
+# electron-builder 产物
+/release/
+# 本地调试用的样书
+/samples/*.txt

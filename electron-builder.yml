@@ -1,0 +1,40 @@
+appId: com.txtreader.app
+productName: TXTReader
+copyright: Copyright © 2025 TXT Reader
+
+directories:
+  output: release
+  buildResources: build
+
+# 只打包构建产物与生产依赖；src/electron/shared 源码不进包
+files:
+  - out/**/*
+  - package.json
+  - '!**/*.map'
+  - '!**/.vscode/*'
+
+asar: true
+compression: normal
+
+win:
+  target:
+    - target: nsis
+      arch:
+        - x64
+    - target: portable
+      arch:
+        - x64
+  artifactName: ${productName}-${version}-${arch}.${ext}
+
+nsis:
+  oneClick: false
+  perMachine: false
+  allowToChangeInstallationDirectory: true
+  createDesktopShortcut: true
+  createStartMenuShortcut: true
+  shortcutName: TXT 阅读器
+  # 卸载时保留 data/ 目录（用户数据不随卸载删除）
+  deleteAppDataOnUninstall: false
+
+portable:
+  artifactName: ${productName}-${version}-portable.${ext}

@@ -1,0 +1,136 @@
+/* ============================================================
+   主题变量：html[data-theme='light' | 'sepia' | 'dark']
+   - 自定义变量：--app-* / --reader-* / --accent / --font-*
+   - sepia 额外覆盖 Element Plus 变量，让 EP 组件也是暖色
+   - dark 的 EP 变量交给 element-plus/theme-chalk/dark/css-vars.css
+   ============================================================ */
+
+:root {
+  --font-serif: Georgia, 'Songti SC', 'SimSun', 'Times New Roman', serif;
+  --font-sans: -apple-system, 'PingFang SC', 'Microsoft YaHei', 'Segoe UI', sans-serif;
+
+  /* 正文排版，运行时由 settings store 用 setProperty 覆盖 */
+  --reader-font-family: var(--font-serif);
+  --reader-font-size: 19px;
+  --reader-line-height: 1.85;
+  --reader-paragraph-gap: 0.9em;
+  --reader-max-width: 760px;
+
+  --app-radius: 10px;
+  --app-shadow: 0 6px 18px rgba(20, 18, 15, 0.08);
+}
+
+/* ---------- light ---------- */
+html[data-theme='light'] {
+  --app-bg: #f4f2ee;
+  --app-panel: #ffffff;
+  --app-fg: #201d19;
+  --app-fg-muted: #6d675e;
+  --app-border: #e2ddd4;
+  --reader-bg: #fbfaf7;
+  --reader-fg: #23201c;
+  --accent: #2f6feb;
+}
+
+/* ---------- sepia ---------- */
+html[data-theme='sepia'] {
+  --app-bg: #f0e6d2;
+  --app-panel: #faf0dc;
+  --app-fg: #4a3f30;
+  --app-fg-muted: #8a7a63;
+  --app-border: #ddcaa8;
+  --reader-bg: #f6ecd8;
+  --reader-fg: #4b3f2f;
+  --accent: #a2662e;
+
+  /* Element Plus 暖色映射 */
+  --el-color-primary: #a2662e;
+  --el-color-primary-light-3: #b7854f;
+  --el-color-primary-light-5: #d0a880;
+  --el-color-primary-light-7: #e3c9b0;
+  --el-color-primary-light-8: #eddbc9;
+  --el-color-primary-light-9: #f5ebe0;
+  --el-color-primary-dark-2: #82522a;
+  --el-bg-color: #faf0dc;
+  --el-bg-color-page: #f0e6d2;
+  --el-bg-color-overlay: #f7ecd7;
+  --el-fill-color-blank: #faf0dc;
+  --el-fill-color-light: #f0e3cb;
+  --el-fill-color-lighter: #f4ead8;
+  --el-text-color-primary: #4a3f30;
+  --el-text-color-regular: #5d5041;
+  --el-text-color-secondary: #8a7a63;
+  --el-text-color-placeholder: #a08e74;
+  --el-border-color: #ddcaa8;
+  --el-border-color-light: #e6d7b9;
+  --el-border-color-lighter: #efe3cb;
+  --el-mask-color: rgba(80, 64, 42, 0.45);
+}
+
+/* ---------- dark（EP 变量由 dark/css-vars.css 接管） ---------- */
+html[data-theme='dark'] {
+  --app-bg: #14161a;
+  --app-panel: #1d2026;
+  --app-fg: #e6e3dd;
+  --app-fg-muted: #9a948b;
+  --app-border: #2f343c;
+  --reader-bg: #171a1f;
+  --reader-fg: #cfcac2;
+  --accent: #7aa2ff;
+  --app-shadow: 0 8px 22px rgba(0, 0, 0, 0.45);
+}
+
+/* ---------- 基础排版 ---------- */
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  background: var(--app-bg);
+  color: var(--app-fg);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+#app {
+  height: 100%;
+}
+
+button {
+  font-family: inherit;
+}
+
+/* 细滚动条，避免默认样式在暖色主题下太突兀 */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--app-fg-muted) 35%, transparent);
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in srgb, var(--app-fg-muted) 60%, transparent);
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--accent) 35%, transparent);
+}
