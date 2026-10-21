@@ -25,6 +25,7 @@ export interface ReaderScroll {
   /** 按屏翻动，screens 为正=向下 */
   page: (screens: number) => void
   isAtBottom: () => boolean
+  isAtTop: () => boolean
 }
 
 /**
@@ -59,6 +60,13 @@ export function useReaderScroll(container: Ref<HTMLElement | null>, store: Reade
     const el = scroller()
     if (!el) return false
     return el.scrollTop + el.clientHeight >= el.scrollHeight - 2
+  }
+
+  // 与 isAtBottom 对称留 2px 容差，抵消缩放后的亚像素误差
+  function isAtTop(): boolean {
+    const el = scroller()
+    if (!el) return false
+    return el.scrollTop <= 2
   }
 
   function onScroll(): void {
@@ -160,5 +168,5 @@ export function useReaderScroll(container: Ref<HTMLElement | null>, store: Reade
     void flush()
   }
 
-  return { ratio, attach, detach, restore, flush, measure, page, isAtBottom }
+  return { ratio, attach, detach, restore, flush, measure, page, isAtBottom, isAtTop }
 }

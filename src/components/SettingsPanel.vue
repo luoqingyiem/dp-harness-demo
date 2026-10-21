@@ -1,64 +1,64 @@
 <script setup lang="ts">
-import { ElDrawer, ElRadioButton, ElRadioGroup, ElSlider, ElSwitch } from 'element-plus'
-import { SETTINGS_LIMITS, type ReaderSettings, type ThemeName } from '@shared/types'
-import SettingsAbout from '@/components/SettingsAbout.vue'
+import { ElDrawer, ElRadioButton, ElRadioGroup, ElSlider, ElSwitch } from "element-plus";
+import { SETTINGS_LIMITS, type ReaderSettings, type ThemeName } from "@shared/types";
+import SettingsAbout from "@/components/SettingsAbout.vue";
 
 const props = defineProps<{
-  settings: ReaderSettings
-}>()
+  settings: ReaderSettings;
+}>();
 
 const emit = defineEmits<{
-  update: [patch: Partial<ReaderSettings>]
-}>()
+  update: [patch: Partial<ReaderSettings>];
+}>();
 
-const visible = defineModel<boolean>({ required: true })
+const visible = defineModel<boolean>({ required: true });
 
-const [FONT_MIN, FONT_MAX] = SETTINGS_LIMITS.fontSize
-const [LINE_MIN, LINE_MAX] = SETTINGS_LIMITS.lineHeight
-const [GAP_MIN, GAP_MAX] = SETTINGS_LIMITS.paragraphSpacing
-const [WIDTH_MIN, WIDTH_MAX] = SETTINGS_LIMITS.maxWidth
+const [FONT_MIN, FONT_MAX] = SETTINGS_LIMITS.fontSize;
+const [LINE_MIN, LINE_MAX] = SETTINGS_LIMITS.lineHeight;
+const [GAP_MIN, GAP_MAX] = SETTINGS_LIMITS.paragraphSpacing;
+const [WIDTH_MIN, WIDTH_MAX] = SETTINGS_LIMITS.maxWidth;
 
 const THEMES: { value: ThemeName; label: string }[] = [
-  { value: 'light', label: '亮色' },
-  { value: 'sepia', label: '暖色' },
-  { value: 'dark', label: '暗色' }
-]
+  { value: "light", label: "亮色" },
+  { value: "sepia", label: "暖色" },
+  { value: "dark", label: "暗色" },
+];
 
 function pick(value: number | number[]): number | null {
-  const next = Array.isArray(value) ? value[0] : value
-  return typeof next === 'number' ? next : null
+  const next = Array.isArray(value) ? value[0] : value;
+  return typeof next === "number" ? next : null;
 }
 
 function onFontSize(value: number | number[]): void {
-  const next = pick(value)
-  if (next !== null) emit('update', { fontSize: next })
+  const next = pick(value);
+  if (next !== null) emit("update", { fontSize: next });
 }
 
 function onLineHeight(value: number | number[]): void {
-  const next = pick(value)
-  if (next !== null) emit('update', { lineHeight: next })
+  const next = pick(value);
+  if (next !== null) emit("update", { lineHeight: next });
 }
 
 function onParagraphSpacing(value: number | number[]): void {
-  const next = pick(value)
-  if (next !== null) emit('update', { paragraphSpacing: next })
+  const next = pick(value);
+  if (next !== null) emit("update", { paragraphSpacing: next });
 }
 
 function onMaxWidth(value: number | number[]): void {
-  const next = pick(value)
-  if (next !== null) emit('update', { maxWidth: next })
+  const next = pick(value);
+  if (next !== null) emit("update", { maxWidth: next });
 }
 
 function onFontFamily(value: string | number | boolean | undefined): void {
-  if (value === 'serif' || value === 'sans') emit('update', { fontFamily: value })
+  if (value === "serif" || value === "sans") emit("update", { fontFamily: value });
 }
 
 function onAutoNext(value: string | number | boolean): void {
-  emit('update', { autoNextChapter: Boolean(value) })
+  emit("update", { autoNextChapter: Boolean(value) });
 }
 
 function onTheme(value: ThemeName): void {
-  emit('update', { theme: value })
+  emit("update", { theme: value });
 }
 </script>
 
@@ -70,13 +70,7 @@ function onTheme(value: ThemeName): void {
           <span class="row__label">字号</span>
           <span class="row__value">{{ props.settings.fontSize }} px</span>
         </div>
-        <ElSlider
-          :model-value="props.settings.fontSize"
-          :min="FONT_MIN"
-          :max="FONT_MAX"
-          :step="1"
-          @update:model-value="onFontSize"
-        />
+        <ElSlider :model-value="props.settings.fontSize" :min="FONT_MIN" :max="FONT_MAX" :step="1" @update:model-value="onFontSize" />
       </section>
 
       <section class="row">
@@ -84,13 +78,7 @@ function onTheme(value: ThemeName): void {
           <span class="row__label">行高</span>
           <span class="row__value">{{ props.settings.lineHeight.toFixed(2) }}</span>
         </div>
-        <ElSlider
-          :model-value="props.settings.lineHeight"
-          :min="LINE_MIN"
-          :max="LINE_MAX"
-          :step="0.05"
-          @update:model-value="onLineHeight"
-        />
+        <ElSlider :model-value="props.settings.lineHeight" :min="LINE_MIN" :max="LINE_MAX" :step="0.05" @update:model-value="onLineHeight" />
       </section>
 
       <section class="row">
@@ -98,13 +86,7 @@ function onTheme(value: ThemeName): void {
           <span class="row__label">段间距</span>
           <span class="row__value">{{ props.settings.paragraphSpacing.toFixed(1) }} em</span>
         </div>
-        <ElSlider
-          :model-value="props.settings.paragraphSpacing"
-          :min="GAP_MIN"
-          :max="GAP_MAX"
-          :step="0.1"
-          @update:model-value="onParagraphSpacing"
-        />
+        <ElSlider :model-value="props.settings.paragraphSpacing" :min="GAP_MIN" :max="GAP_MAX" :step="0.1" @update:model-value="onParagraphSpacing" />
       </section>
 
       <section class="row">
@@ -112,13 +94,7 @@ function onTheme(value: ThemeName): void {
           <span class="row__label">内容宽度</span>
           <span class="row__value">{{ props.settings.maxWidth }} px</span>
         </div>
-        <ElSlider
-          :model-value="props.settings.maxWidth"
-          :min="WIDTH_MIN"
-          :max="WIDTH_MAX"
-          :step="20"
-          @update:model-value="onMaxWidth"
-        />
+        <ElSlider :model-value="props.settings.maxWidth" :min="WIDTH_MIN" :max="WIDTH_MAX" :step="20" @update:model-value="onMaxWidth" />
       </section>
 
       <section class="row">
@@ -152,13 +128,10 @@ function onTheme(value: ThemeName): void {
 
       <section class="row row--inline">
         <div class="row__head">
-          <span class="row__label">自动续章</span>
-          <span class="row__hint">滚到章末后继续滚动自动进入下一章</span>
+          <span class="row__label">顶上/底下自动翻章</span>
+          <span class="row__hint">在章首继续上滚切上一章，在章末继续下滚切下一章</span>
         </div>
-        <ElSwitch
-          :model-value="props.settings.autoNextChapter"
-          @update:model-value="onAutoNext"
-        />
+        <ElSwitch :model-value="props.settings.autoNextChapter" @update:model-value="onAutoNext" />
       </section>
 
       <SettingsAbout :data-dir="props.settings.dataDir" />
@@ -233,7 +206,9 @@ function onTheme(value: ThemeName): void {
   color: var(--app-fg-muted);
   font-size: 12px;
   cursor: pointer;
-  transition: border-color 0.14s ease, color 0.14s ease;
+  transition:
+    border-color 0.14s ease,
+    color 0.14s ease;
 }
 
 .themes__item.is-active {
